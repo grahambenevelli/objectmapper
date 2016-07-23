@@ -1,5 +1,6 @@
 {
     "name": "grahamsfault/objectmapper",
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "Gb\\": "src/"
