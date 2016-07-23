@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "28190dd6fefef4dc70abbd0fb6104658",
-    "content-hash": "37812ec35bae850e1bfb97b133c3ef98",
+    "hash": "d56a22a7d5b09d8c424ee29c23b4ca68",
+    "content-hash": "542f219880a74b6b0bbb509b78a3f0f9",
     "packages": [
         {
             "name": "grahamsfault/tadgola",
@@ -1308,7 +1308,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "grahamsfault/tadgola": 20
+        "grahamsfault/tadgola": 20,
+        "grahamsfault/objectmapper": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

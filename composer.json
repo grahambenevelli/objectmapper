@@ -11,7 +11,8 @@
     "require": {
         "sabre/xml": "^1.4",
         "grahamsfault/tadgola": "dev-master",
-        "myclabs/php-enum": "^1.4"
+        "myclabs/php-enum": "^1.4",
+        "grahamsfault/objectmapper": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8"
