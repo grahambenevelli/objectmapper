@@ -82,6 +82,13 @@ abstract class ObjectMapper implements IObjectMapper
 		}
 
 		if ($parsed->getType() == 'object') {
+			if ($this->config->getConvertEntries() &&
+				is_string($type) &&
+				substr($type, -2) == '[]') {
+				return [
+					$this->processParsedObject($parsed, $this->getSubtype($type))
+				];
+			}
 			return $this->processParsedObject($parsed, $type);
 		}
 

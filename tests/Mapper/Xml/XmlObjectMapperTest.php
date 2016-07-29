@@ -6,6 +6,7 @@ use Gb\Mapper\OtherNamespace\SimpleDataTypeInOtherNamespace;
 use Gb\Mapper\TestObjects\MixedDataType;
 use Gb\Mapper\TestObjects\NestedDataType;
 use Gb\Mapper\TestObjects\NestedOtherNamespaceType;
+use Gb\Mapper\TestObjects\ObjectArrayType;
 use Gb\Mapper\TestObjects\PrimitiveDataTypes;
 use Gb\Mapper\TestObjects\PrimitiveDataTypesWithPrivateProps;
 use Gb\Mapper\TestObjects\PrimitiveDataTypesWithSetters;
@@ -42,12 +43,13 @@ class XmlObjectMapperTest extends PHPUnit_Framework_TestCase
             $this->getNestedTypesTest(),
             $this->getMixedTypeTest(),
             $this->getOtherNamespaceTest(),
+            $this->getObjectArrayTest(),
+            $this->getObjectArrayWithSingleItemTest(),
         ];
     }
 
     /**
      * @dataProvider parsingDataProvider
-     * @group now
      */
     public function testParsing($json, $expected, $object)
     {
@@ -307,6 +309,92 @@ class XmlObjectMapperTest extends PHPUnit_Framework_TestCase
             $xml,
             $expected,
             new MixedDataType(),
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function getObjectArrayTest()
+    {
+        $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+            <ObjectArrayType>
+                <objects>
+                    <integer>3</integer>
+                    <string>test string</string>
+                    <boolean>true</boolean>
+                    <float>1.1</float>
+                    <array>1</array>
+                    <array>2</array>
+                    <array>3</array>
+                </objects>
+                <objects>
+                    <integer>4</integer>
+                    <string>test string</string>
+                    <boolean>true</boolean>
+                    <float>1.1</float>
+                    <array>1</array>
+                    <array>2</array>
+                    <array>3</array>
+                </objects>
+            </ObjectArrayType>";
+
+        $nestedObject1 = new PrimitiveDataTypes();
+        $nestedObject1->integer = 3;
+        $nestedObject1->string = 'test string';
+        $nestedObject1->boolean = true;
+        $nestedObject1->float = 1.1;
+        $nestedObject1->array = [1, 2, 3];
+
+        $nestedObject2 = new PrimitiveDataTypes();
+        $nestedObject2->integer = 4;
+        $nestedObject2->string = 'test string';
+        $nestedObject2->boolean = true;
+        $nestedObject2->float = 1.1;
+        $nestedObject2->array = [1, 2, 3];
+
+        $expected = new ObjectArrayType();
+        $expected->objects = [$nestedObject1, $nestedObject2];
+
+        return [
+            $xml,
+            $expected,
+            new ObjectArrayType(),
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function getObjectArrayWithSingleItemTest()
+    {
+        $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+            <ObjectArrayType>
+                <objects>
+                    <integer>3</integer>
+                    <string>test string</string>
+                    <boolean>true</boolean>
+                    <float>1.1</float>
+                    <array>1</array>
+                    <array>2</array>
+                    <array>3</array>
+                </objects>
+            </ObjectArrayType>";
+
+        $nestedObject1 = new PrimitiveDataTypes();
+        $nestedObject1->integer = 3;
+        $nestedObject1->string = 'test string';
+        $nestedObject1->boolean = true;
+        $nestedObject1->float = 1.1;
+        $nestedObject1->array = [1, 2, 3];
+
+        $expected = new ObjectArrayType();
+        $expected->objects = [$nestedObject1];
+
+        return [
+            $xml,
+            $expected,
+            new ObjectArrayType(),
         ];
     }
 }
