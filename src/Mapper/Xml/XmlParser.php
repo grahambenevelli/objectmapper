@@ -6,6 +6,7 @@ use Gb\Mapper\ParserInterface;
 use Gb\Mapper\Tree\ArrayNode;
 use Gb\Mapper\Tree\BasicTypeNode;
 use Gb\Mapper\Tree\Node;
+use Gb\Mapper\Tree\NullNode;
 use Gb\Mapper\Tree\ObjectNode;
 use Sabre\Xml\Reader;
 use stdClass;
@@ -55,7 +56,7 @@ class XmlParser implements ParserInterface
 	private function convertToNodes($parsed)
 	{
 		if (is_null($parsed)) {
-			return null;
+			return new NullNode();
 		}
 
 		if ($this->isPrimitiveType($parsed)) {

@@ -66,6 +66,10 @@ abstract class ObjectMapper implements IObjectMapper
 	 */
 	private function processParsed(Node $parsed, $type, $subtype = null)
 	{
+		if ($parsed->getType() == 'null') {
+			return null;
+		}
+		
 		if ($parsed->isSimpleType()) {
 			if ($this->config->getConvertEntries() && $parsed->getType() != $type) {
 				return $this->convertNode($parsed, $type, $subtype);
